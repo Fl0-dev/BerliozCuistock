@@ -1,0 +1,11 @@
+{
+    "routes": [
+        {
+            "path": "/user",
+            "context": [
+                "My\\Project\\Controller\\UserController",
+                "create"
+            ]
+        }
+    ]
+}

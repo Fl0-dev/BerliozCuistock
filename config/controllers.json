@@ -1,0 +1,6 @@
+{
+  "controllers": [
+    "App\\Controller\\MainController",
+    "App\\Controller\\UserController"
+  ]
+}
