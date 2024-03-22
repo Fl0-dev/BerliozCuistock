@@ -1,10 +1,17 @@
 {
     "routes": [
         {
-            "path": "/user",
+            "path": "/register",
             "context": [
-                "My\\Project\\Controller\\UserController",
-                "create"
+                "App\\Controller\\UserController",
+                "registerView"
+            ]
+        },
+        {
+            "path": "/create",
+            "context": [
+                "App\\Controller\\UserController",
+                "register"
             ]
         }
     ]
