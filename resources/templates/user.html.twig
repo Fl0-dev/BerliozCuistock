@@ -16,35 +16,56 @@
 			<div class="row align-items-start">
 				<div class="col">
 					<form class="row g-3" method="post" action="create">
-						<div class="col-6">
+						<div class="col-md-6">
 							<label for="firstname" class="form-label">Firstname</label>
-							<input type="text" class="form-control" id="firstname" name="firstname" value={{firstname | default('')}}>
+							<input type="text" class="form-control" id="firstname" name="firstname" value={{data.firstname | default('')}}>
+							{% if errors.firstname %}
+								<div class="error text-danger">{{ errors.firstname }}</div>
+							{% endif %}
 						</div>
-						<div class="col-6">
+						<div class="col-md-6">
 							<label for="lastname" class="form-label">Lastname</label>
-							<input type="text" class="form-control" id="lastname" name="lastname" value={{lastname | default('')}}>
+							<input type="text" class="form-control" id="lastname" name="lastname" value={{data.lastname | default('')}}>
+							{% if errors.lastname %}
+								<div class="error text-danger">{{ errors.lastname }}</div>
+							{% endif %}
 						</div>
 						<div class="col-md-6">
 							<label for="email" class="form-label">Email</label>
-							<input type="email" class="form-control" id="email" name="email" value={{email | default('')}}>
+							<input type="email" class="form-control" id="email" name="email" value={{data.email | default('')}}>
+							{% if errors.email %}
+								<div class="error text-danger">{{ errors.email }}</div>
+							{% endif %}
 						</div>
 						<div class="col-md-6">
 							<label for="password" class="form-label">Password</label>
 							<input type="password" class="form-control" id="password" name="password">
+							{% if errors.password %}
+								<div class="error text-danger">{{ errors.password }}</div>
+							{% endif %}
 						</div>
 						<div class="col-12">
 							<label for="address" class="form-label">Address</label>
-							<input type="text" class="form-control" id="address" name="address" value={{address | default('')}}>
+							<input type="text" class="form-control" id="address" name="address" value={{data.address | default('')}}>
+							{% if errors.address %}
+								<div class="error text-danger">{{ errors.address }}</div>
+							{% endif %}
 						</div>
 						<div class="col-md-6">
 							<label for="city" class="form-label">City</label>
-							<input type="text" class="form-control" id="city" name="city" value={{city | default('')}}>
+							<input type="text" class="form-control" id="city" name="city" value={{data.city | default('')}}>
+							{% if errors.city %}
+								<div class="error text-danger">{{ errors.city }}</div>
+							{% endif %}
 						</div>
 						<div class="col-md-2">
 							<label for="postalCode" class="form-label">PostalCode</label>
-							<input type="text" class="form-control" id="postalCode" name="postalCode" value={{firstpostalCodename | default('')}}>
+							<input type="text" class="form-control" id="postalCode" name="postalCode" value={{data.postalCode | default('')}}>
+							{% if errors.postalCode %}
+								<div class="error text-danger">{{ errors.postalCode }}</div>
+							{% endif %}
 						</div>
-						<div class="col-12">
+						<div class="col-12 d-flex justify-content-center justify-content-lg-start">
 							<button type="submit" class="btn btn-primary">Sign in</button>
 						</div>
 					</form>
