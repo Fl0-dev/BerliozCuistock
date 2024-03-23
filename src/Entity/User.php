@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Hector\Orm\Entity\Entity;
 
 // use Hector\Orm\Entity\MagicEntity;
@@ -9,32 +10,18 @@ use Hector\Orm\Entity\Entity;
 class User extends Entity
 {
     private int $id;
-    private string $firstname;
-    private string $lastname;
+    private ?string $firstname;
+    private ?string $lastname;
     private string $email;
     private string $password;
-    private string $address;
-    private string $city;
-    private string $postalCode;
+    private ?string $address;
+    private ?string $city;
+    private ?string $postalCode;
+    private DateTime $created_at;
+    private ?DateTime $updated_at;
 
-    public function __construct(
-        int $id,
-        string $firstname,
-        string $lastname,
-        string $email,
-        string $password,
-        string $address,
-        string $city,
-        string $postalCode
-    ) {
-        $this->id = $id;
-        $this->firstname = $firstname;
-        $this->lastname = $lastname;
-        $this->email = $email;
-        $this->password = $password;
-        $this->address = $address;
-        $this->city = $city;
-        $this->postalCode = $postalCode;
+    public function __construct()
+    {
     }
 
     public function getId(): int
@@ -42,13 +29,93 @@ class User extends Entity
         return $this->id;
     }
 
-    public function getFirstname(): string
+    public function getFirstname(): ?string
     {
         return $this->firstname;
     }
 
-    public function getLastname(): string
+    public function getLastname(): ?string
     {
         return $this->lastname;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function getPostalCode(): ?string
+    {
+        return $this->postalCode;
+    }
+
+    public function getCreateAt(): DateTime
+    {
+        return $this->created_at;
+    }
+
+    public function getUpdateAt(): ?DateTime
+    {
+        return $this->updated_at;
+    }
+
+    public function setFirstname(string $firstname): void
+    {
+        $this->firstname = $firstname;
+    }
+
+    public function setLastname(string $lastname): void
+    {
+        $this->lastname = $lastname;
+    }
+
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
+    }
+
+    public function setPassword(string $password): void
+    {
+        $this->password = $password;
+    }
+
+    public function setAddress(string $address): void
+    {
+        $this->address = $address;
+    }
+
+    public function setCity(string $city): void
+    {
+        $this->city = $city;
+    }
+
+    public function setPostalCode(string $postalCode): void
+    {
+        $this->postalCode = $postalCode;
+    }
+
+    public function setCreateAt(DateTime $created_at): void
+    {
+        $this->created_at = $created_at;
+    }
+
+    public function setUpdateAt(DateTime $updated_at): void
+    {
+        $this->updated_at = $updated_at;
     }
 }

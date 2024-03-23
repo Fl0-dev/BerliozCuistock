@@ -39,9 +39,6 @@ class UserController extends AbstractController
     public function create(Request $request): ResponseInterface
     {
         if ($request->getParsedBody() !== null) {
-            $user = User::findOrFail(1);
-
-            var_dump($user->getFirstname());
 
             $firstname = $request->getParsedBody()['firstname'] ?? null;
             $lastname = $request->getParsedBody()['lastname'] ?? null;
@@ -50,12 +47,24 @@ class UserController extends AbstractController
             $address = $request->getParsedBody()['address'] ?? null;
             $city = $request->getParsedBody()['city'] ?? null;
             $postalCode = $request->getParsedBody()['postalCode'] ?? null;
+
+            $user = new User();
+            $user->setFirstname($firstname);
+            $user->setLastname($lastname);
+            $user->setEmail($email);
+            $user->setPassword(password_hash($password, PASSWORD_DEFAULT));
+            $user->setAddress($address);
+            $user->setCity($city);
+            $user->setPostalCode($postalCode);
+            // $user->setCreateAt(new \DateTime());
+            // $user->setUpdateAt(new \DateTime());
+
+            $user->save();
         }
         return $this->response($this->render('user.html.twig', [
             'firstname' => $firstname,
             'lastname' => $lastname,
             'email' => $email,
-            'password' => $password,
             'address' => $address,
             'city' => $city,
             'postalCode' => $postalCode
