@@ -1,17 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<title>Welcome</title>
+{% extends 'base.html.twig' %}
 
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-		<meta name="description" content="First page on Berlioz Framework">
-		<meta name="author" content="">
+{% block title %}
+	{{parent()}}
+	| Home
+{% endblock %}
 
-		{{ entrypoints('app', 'css', {preload: true}) }}
-	</head>
-	<body>
+{% block body %}
+	<section>
 		<div class="container my-5">
 			<div class="row align-items-start">
 				<div class="col">
@@ -19,12 +14,12 @@
 						<div class="row align-items-center">
 							<div class="col-12 col-md-6 order-1 order-md-0 mt-3 mt-md-0">
 								<h1 class="display-4">Welcome</h1>
-								<p class="lead">Thanks you to have propulsed your application with Berlioz Framework !</p>
+								<p class="lead">Welcome to Berlioz Cuistock</p>
 								<hr class="my-4">
-								<p>To start, you probably need to read the documentation:</p>
+								<p>To start, you probably add recipes:</p>
 								<p class="lead">
-									<a role="button" class="btn btn-primary btn-lg" href="https://getberlioz.com/doc/" target="_blank" rel="noopener">
-										Berlioz documentations
+									<a role="button" class="btn btn-primary btn-lg" href={{path('fetchRecipes')}}>
+										Add Recipes
 									</a>
 								</p>
 							</div>
@@ -34,11 +29,10 @@
 						</div>
 					</div>
 				</div>
+				{% for item in data %}
+					<p>{{ item }}</p>
+				{% endfor %}
 			</div>
 		</div>
-
-		{{ entrypoints('app', 'js', {preload: true}) }}
-		<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
-		{{ include('@Berlioz-HttpCore/Twig/Debug.twig') }}
-	</body>
-</html>
+	</section>
+{% endblock %}

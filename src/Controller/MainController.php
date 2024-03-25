@@ -30,7 +30,7 @@ class MainController extends AbstractController
      * @throws BerliozException
      * @throws Error
      */
-    #[Berlioz\Route('/')]
+    #[Berlioz\Route('/', name: 'home')]
     public function home(): ResponseInterface
     {
         return $this->response($this->render('home.html.twig'));
