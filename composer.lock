@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ed536927dafaff259e984f07935c5a68",
+    "content-hash": "c2596ec6e3f4358c8f4ec68fb9b03a76",
     "packages": [
         {
             "name": "berlioz/cli-core",
@@ -2132,7 +2132,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "berlioz/hector-package": 10
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

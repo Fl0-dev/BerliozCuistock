@@ -59,7 +59,7 @@ class UserController extends AbstractController
             $user->setCity($data['city']);
             $user->setPostalCode($data['postalCode']);
 
-            $user->$user->save();
+            $user->save();
             unset($data['password']);
         }
         return $this->response($this->render('user.html.twig', [
