@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block body %}
-	<section>
+	<section clas="mt-5">
 		<div class="container my-5">
 			<div class="row align-items-start">
 				<div class="col">
@@ -16,12 +16,14 @@
 								<h1 class="display-4">Welcome</h1>
 								<p class="lead">Welcome to Berlioz Cuistock</p>
 								<hr class="my-4">
-								<p>To start, you probably add recipes:</p>
-								<p class="lead">
-									<a role="button" class="btn btn-primary btn-lg" href={{path('fetchRecipes')}}>
-										Add Recipes
-									</a>
-								</p>
+								<p>To start, you probably add recipes with one principal ingredient :</p>
+								<form method="post" action="fetchRecipes">
+									<label for="ingredient" class="form-label"/>
+									<input type="text" name="ingredient" class="form-control mb-3" placeholder="One ingredient">
+									<div class="col-12 d-flex justify-content-center justify-content-lg-start">
+										<button type="submit" class="btn btn-primary">Add Recipes</button>
+									</div>
+								</form>
 							</div>
 							<div class="col-6 mx-auto me-md-0 col-md-5 px-md-5 order-0 order-md-1">
 								<img src="{{ asset('images/logo.svg') }}" id="logo" alt="Berlioz logo">

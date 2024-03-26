@@ -13,6 +13,13 @@
                 "App\\Controller\\UserController",
                 "register"
             ]
+        },
+        {
+            "path": "/fetchRecipes",
+            "context": [
+                "App\\Controller\\RecipeController",
+                "fetchRecipesAndSave"
+            ]
         }
     ]
 }

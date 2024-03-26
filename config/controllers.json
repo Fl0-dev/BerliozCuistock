@@ -1,6 +1,7 @@
 {
   "controllers": [
     "App\\Controller\\MainController",
-    "App\\Controller\\UserController"
+    "App\\Controller\\UserController",
+    "App\\Controller\\RecipeController"
   ]
 }
