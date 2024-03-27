@@ -28,8 +28,10 @@ class RecipeController extends AbstractController
         $ingredient = $postData['ingredient'];
         $curl = curl_init();
 
+        $apikey = $_ENV['API_KEY'];
+
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.spoonacular.com/recipes/complexSearch?number=100&instructionsRequired=true&addRecipeInformation=true&query=$ingredient&apiKey=[YOUR_API_KEY]",
+            CURLOPT_URL => "https://api.spoonacular.com/recipes/complexSearch?number=100&instructionsRequired=true&addRecipeInformation=true&query=$ingredient&apiKey=$apikey",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,

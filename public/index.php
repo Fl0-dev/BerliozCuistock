@@ -3,6 +3,9 @@
 // Load composer loaded
 $loader = require_once __DIR__ . "/../vendor/autoload.php";
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
+$dotenv->load();
+
 try {
     // CLI Server
     if (php_sapi_name() === 'cli-server') {

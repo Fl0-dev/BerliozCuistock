@@ -25,7 +25,8 @@
     "php": "^8.0",
     "berlioz/cli-core": "^2.2",
     "berlioz/hector-package": "^2.0@beta",
-    "berlioz/http-core": "^2.1"
+    "berlioz/http-core": "^2.1",
+    "vlucas/phpdotenv": "^5.6"
   },
   "config": {
     "optimize-autoloader": true,

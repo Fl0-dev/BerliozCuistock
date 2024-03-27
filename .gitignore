@@ -7,7 +7,7 @@
 /.phpunit.result.cache
 !**/.gitkeep
 hector.json
-
+.env
 # Dev environment
 .idea
 .vscode
