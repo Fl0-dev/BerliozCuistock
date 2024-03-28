@@ -20,6 +20,13 @@
                 "App\\Controller\\RecipeController",
                 "fetchRecipesAndSave"
             ]
+        },
+        {
+            "path": "/recipes",
+            "context": [
+                "App\\Controller\\RecipeController",
+                "recipesView"
+            ]
         }
     ]
 }

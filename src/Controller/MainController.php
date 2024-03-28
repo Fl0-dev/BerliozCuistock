@@ -15,6 +15,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Entity\Recipe;
 use Berlioz\Core\Exception\BerliozException;
 use Berlioz\Http\Core\Attribute as Berlioz;
 use Berlioz\Http\Core\Controller\AbstractController;
@@ -33,6 +34,8 @@ class MainController extends AbstractController
     #[Berlioz\Route('/', name: 'home')]
     public function home(): ResponseInterface
     {
-        return $this->response($this->render('home.html.twig'));
+        $recipes = Recipe::getRandomRecipes(5);
+
+        return $this->response($this->render('home.html.twig', ['recipes' => $recipes]));
     }
 }

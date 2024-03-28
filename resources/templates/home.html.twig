@@ -10,7 +10,7 @@
 		<div class="container my-5">
 			<div class="row align-items-start">
 				<div class="col">
-					<div class="jumbotron text-center text-md-start">
+					<div class="jumbotron text-center text-md-start mt-5">
 						<div class="row align-items-center">
 							<div class="col-12 col-md-6 order-1 order-md-0 mt-3 mt-md-0">
 								<h1 class="display-4">Welcome</h1>
@@ -19,14 +19,14 @@
 								<p>To start, you probably add recipes with one principal ingredient :</p>
 								<form method="post" action="fetchRecipes">
 									<label for="ingredient" class="form-label"/>
-									<input type="text" name="ingredient" class="form-control mb-3" placeholder="One ingredient">
+									<input type="text" id="ingredient" name="ingredient" class="form-control mb-3" placeholder="One ingredient">
 									<div class="col-12 d-flex justify-content-center justify-content-lg-start">
 										<button type="submit" class="btn btn-primary">Add Recipes</button>
 									</div>
 								</form>
 							</div>
 							<div class="col-6 mx-auto me-md-0 col-md-5 px-md-5 order-0 order-md-1">
-								<img src="{{ asset('images/logo.svg') }}" id="logo" alt="Berlioz logo">
+								<img src="{{ asset('images/logo.svg') }}" id="logo" alt="Cuistock logo">
 							</div>
 						</div>
 					</div>
@@ -34,7 +34,27 @@
 				{% for item in data %}
 					<p>{{ item }}</p>
 				{% endfor %}
+				<div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 g-4 justify-content-center">
+					{% for recipe in recipes %}
+						<div class="col">
+							<div class="card h-100">
+								<a href="{{ path('recipe', {'id': recipe.id}) }}" class="text-decoration-none">
+									{% if recipe.image == null %}
+										<img src="{{ asset('images/placeholder.webp') }}" class="card-img-top" alt="{{recipe.title}}">
+									{% else %}
+										<img id="img" src="{{recipe.image}}" class="card-img-top" alt="{{recipe.title}}">
+									{% endif %}
+									<div class="card-body">
+										<h5 class="card-title text-black">{{recipe.title}}</h5>
+										<button type="button" class="btn btn-info">
+											View Recipe
+										</button>
+									</div>
+								</a>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
 			</div>
-		</div>
-	</section>
-{% endblock %}
+		</section>
+	{% endblock %}

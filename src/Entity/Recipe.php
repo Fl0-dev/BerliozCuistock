@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use DateTime;
+use Generator;
 use Hector\Orm\Entity\Entity;
 
 class Recipe extends Entity
@@ -12,7 +13,7 @@ class Recipe extends Entity
     private string $description;
     private string $ingredients;
     private string $instructions;
-    private string $image;
+    private ?string $image;
     private DateTime $created_at;
     private ?DateTime $updated_at;
 
@@ -45,7 +46,7 @@ class Recipe extends Entity
         return $this->instructions;
     }
 
-    public function getImage(): string
+    public function getImage(): ?string
     {
         return $this->image;
     }
@@ -80,7 +81,7 @@ class Recipe extends Entity
         $this->instructions = $instructions;
     }
 
-    public function setImage(string $image): void
+    public function setImage(?string $image): void
     {
         $this->image = $image;
     }
@@ -116,5 +117,20 @@ class Recipe extends Entity
             ->fetchOne();
 
         return $recipe !== null;
+    }
+
+    public static function getRandomRecipes(int $number)
+    {
+        $count = Recipe::query()
+            ->count();
+        if ($count === 0) {
+            return [];
+        }
+        $offset = rand(0, $count - $number);
+
+        return Recipe::query()
+            ->limit($number)
+            ->offset($offset)
+            ->fetchAll();
     }
 }

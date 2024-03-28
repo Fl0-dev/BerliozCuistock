@@ -8,7 +8,6 @@ class RecipeMapper
 {
     public static function map(array $data): array
     {
-        // vérification si le title de $data existe en bdd
         if (Recipe::findByTitle($data['title'])) {
             return [];
         }
@@ -40,10 +39,17 @@ class RecipeMapper
             }
         }
 
+        //Vérification si l'url de l'image ne renvoie pas une erreur 404
+        $image = $data['image'];
+        $headers = get_headers($image);
+        if (strpos($headers[0], '404') !== false) {
+            $image = null;
+        }
+
         return [
             'title' => $data['title'],
             'description' => $data['summary'],
-            'image' => $data['image'],
+            'image' => $image,
             'ingredients' => json_encode($ingredients),
             'instructions' => json_encode($instructions),
         ];
