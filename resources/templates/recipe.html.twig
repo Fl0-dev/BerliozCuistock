@@ -6,9 +6,45 @@
 {% endblock %}
 
 {% block body %}
-	<h1>{{recipe.title}}</h1>
-	<p>{{recipe.description}}</p>
-	<p>{{recipe.ingredients}}</p>
-	<p>{{recipe.instructions}}</p>
+	<class="container">
+		<div class="my-5 d-flex flex-column align-items-center">
+			<h1 class="fw-bold fs-1">{{recipe.title}}</h1>
+			<img src="{{recipe.image}}" alt="{{recipe.title}}" class="rounded-3 w-50"/>
+		</div>
+		{# <div class="d-flex justify-content-between">
+		        <a href="#" class="btn btn-primary">Edit</a>
+		        <a href="#" class="btn btn-danger">Delete</a>
+		    </div> #}
 
-{% endblock %}
+		<div class="wrapper">
+			<div class="inside-wrapper">
+				<h2>Description</h2>
+				<p>{{recipe.description|raw}}</p>
+			</div>
+		</div>
+
+		<div class="wrapper">
+			<div class="inside-wrapper">
+				<h2>Ingredients</h2>
+				<ul class="">
+					{% for ingredient in recipe.ingredients %}
+						<li>
+							{{ingredient.name}}
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+
+		<div class="wrapper">
+			<div class="inside-wrapper">
+				<h2>Instructions</h2>
+				<ol>
+					{% for instruction in recipe.instructions %}
+						<li>
+							{{instruction.description}}</li>
+					{% endfor %}
+				</ol>
+			</div>
+		</div>
+	{% endblock %}

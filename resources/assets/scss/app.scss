@@ -1,6 +1,7 @@
 // Website
 
 @import "variables";
+@import "recipe";
 @import "../../../node_modules/bootstrap/scss/bootstrap";
 
 
@@ -14,6 +15,11 @@ html, body {
     background-color: $dark;
     color: $white;
   }
+}
+
+section {
+  margin-top: 5rem;
+  margin-bottom: 5rem;
 }
 
 .jumbotron {

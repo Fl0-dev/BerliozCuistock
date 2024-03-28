@@ -49,6 +49,10 @@ class RecipeController extends AbstractController
         $id = $request->getAttribute('id');
         $recipe = Recipe::find($id);
 
+        $recipe = $recipe->toArray();
+        $recipe['ingredients'] = json_decode($recipe['ingredients'], true);
+        $recipe['instructions'] = json_decode($recipe['instructions'], true);
+
         return $this->response($this->render('recipe.html.twig', ['recipe' => $recipe]));
     }
 

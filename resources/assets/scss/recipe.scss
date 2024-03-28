@@ -1,0 +1,16 @@
+.wrapper {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    position: relative;
+    background: linear-gradient(to right, purple, pink);
+    padding: 3px;
+    border-radius: 1rem;
+
+    .inside-wrapper {
+        border-radius: 1rem;
+        background: #212529;
+        color: white;
+        padding: 2rem;
+    }
+}
