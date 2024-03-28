@@ -24,3 +24,28 @@ html, body {
     height: auto;
   }
 }
+
+.card-link {
+  width: auto;
+  max-height: 16rem;
+
+  &:hover {
+    filter: brightness(50%);
+    transition: 0.5s;
+  }
+
+  .card {  
+    .card-img {
+      width: 312px;
+      height: 231px;
+      object-fit: cover;
+      filter: brightness(80%);
+    }
+
+    .card-img-overlay {
+      .card-title {
+        color: white;
+      }
+    }
+  }
+}

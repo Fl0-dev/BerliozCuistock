@@ -9,23 +9,14 @@
 	<h1>Recipes</h1>
 	<div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 g-4 justify-content-center">
 		{% for recipe in recipes %}
-			<div class="col">
-				<div class="card h-100">
-					<a href="{{ path('recipe', {'id': recipe.id}) }}" class="text-decoration-none">
-						{% if recipe.image == null %}
-							<img src="{{ asset('images/placeholder.webp') }}" class="card-img-top" alt="{{recipe.title}}">
-						{% else %}
-							<img id="img" src="{{recipe.image}}" class="card-img-top" alt="{{recipe.title}}">
-						{% endif %}
-						<div class="card-body">
-							<h5 class="card-title text-black">{{recipe.title}}</h5>
-							<button type="button" class="btn btn-info">
-								View Recipe
-							</button>
-						</div>
-					</a>
+			<a href="{{ path('recipe', {'id': recipe.id}) }}" class="card-link text-decoration-none">
+				<div class="card bg-dark">
+					<img src="{{ recipe.image ?: asset('images/placeholder.webp') }}" class="card-img" alt="{{ recipe.title }}">
+					<div class="card-img-overlay">
+						<h5 class="card-title text-white">{{recipe.title}}</h5>
+					</div>
 				</div>
-			</div>
+			</a>
 		{% endfor %}
 	</div>
 {% endblock %}
