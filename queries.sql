@@ -14,7 +14,7 @@ CREATE TABLE user (
 CREATE TABLE recipe (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
-    image VARCHAR(255) NOT NULL,
+    image VARCHAR(255),
     description TEXT NOT NULL,
     ingredients TEXT NOT NULL,
     instructions TEXT NOT NULL,
