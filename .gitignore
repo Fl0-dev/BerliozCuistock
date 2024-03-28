@@ -8,6 +8,8 @@
 !**/.gitkeep
 hector.json
 .env
+app.css
+app.css.map
 # Dev environment
 .idea
 .vscode
