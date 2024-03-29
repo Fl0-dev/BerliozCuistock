@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity\Recipe;
 use App\Service\RecipeMapper;
+use App\Service\Utils;
 use Berlioz\Http\Core\Controller\AbstractController;
 use Psr\Http\Message\ResponseInterface;
 use Berlioz\Core\Exception\BerliozException;
@@ -27,13 +28,17 @@ class RecipeController extends AbstractController
     #[Berlioz\Route('/recipes', name: 'recipes')]
     public function recipesView(): ResponseInterface
     {
+        $isUser = Utils::userInSession();
         $recipes = Recipe::all();
         $arrayRecipes = [];
         foreach ($recipes as $recipe) {
             $arrayRecipes[] = $recipe->toArray();
         }
 
-        return $this->response($this->render('recipes.html.twig', ['recipes' => $arrayRecipes]));
+        return $this->response($this->render('recipes.html.twig', [
+            'recipes' => $arrayRecipes,
+            'isUser' => $isUser,
+        ]));
     }
 
     /**
@@ -46,6 +51,7 @@ class RecipeController extends AbstractController
     #[Berlioz\Route('/recipe/{id}', name: 'recipe')]
     public function recipeView(ServerRequest $request): ResponseInterface
     {
+        $isUser = Utils::userInSession();
         $id = $request->getAttribute('id');
         $recipe = Recipe::find($id);
 
@@ -53,7 +59,10 @@ class RecipeController extends AbstractController
         $recipe['ingredients'] = json_decode($recipe['ingredients'], true);
         $recipe['instructions'] = json_decode($recipe['instructions'], true);
 
-        return $this->response($this->render('recipe.html.twig', ['recipe' => $recipe]));
+        return $this->response($this->render('recipe.html.twig', [
+            'recipe' => $recipe,
+            'isUser' => $isUser,
+        ]));
     }
 
     /**
@@ -66,6 +75,7 @@ class RecipeController extends AbstractController
     #[Berlioz\Route('/fetchRecipes', name: 'fetchRecipes', method: ['POST'])]
     public function fetchRecipesAndSave(Request $request): ResponseInterface
     {
+        $isUser = Utils::userInSession();
         $postData = $request->getParsedBody();
         $ingredient = $postData['ingredient'];
         $curl = curl_init();
@@ -90,7 +100,10 @@ class RecipeController extends AbstractController
         $recipes = $responseToArray['results'];
 
         if (empty($recipes)) {
-            return $this->response($this->render('home.html.twig', ['data' => ['No recipes found with the ingredient ' . $ingredient . '. Please try another ingredient.']]));
+            return $this->response($this->render('home.html.twig', [
+                'data' => ['No recipes found with the ingredient ' . $ingredient . '. Please try another ingredient.'],
+                'isUser' => $isUser,
+            ]));
         }
 
         foreach ($recipes as $recipe) {
@@ -115,6 +128,7 @@ class RecipeController extends AbstractController
         return $this->response($this->render('home.html.twig', [
             'data' => $data,
             'recipes' => $recipes,
+            'isUser' => $isUser,
         ]));
     }
 }

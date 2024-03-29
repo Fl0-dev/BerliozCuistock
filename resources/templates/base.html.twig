@@ -8,7 +8,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 		<meta name="description" content="Page on BerliozCuistock">
 		<meta name="author" content="">
-
+		<title>
+			{% block title %}Cuistock
+			{% endblock %}
+		</title>
 		{{ entrypoints('app', 'css', {preload: true}) }}
 	</head>
 	<body class="container">
@@ -28,15 +31,21 @@
 						</li>
 
 					</ul>
-					<div class="navbar-left">
-						<a href="{{ path('user') }}" class="bucket-svg">Register</a>
-					</div>
+					{% if isUser %}
+						<div class="navbar-left">
+							<a href="{{ path('logout') }}" class="btn btn-info">Logout</a>
+						</div>
+
+					{% else %}
+						<div class="navbar-left">
+							<a href="{{ path('login') }}" class="btn btn-info">Login</a>
+						</div>
+					{% endif %}
 				</div>
 			</div>
 		</nav>
 		{% block body %}{% endblock %}
 		{{ entrypoints('app', 'js', {preload: true}) }}
 		<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
-		{{ include('@Berlioz-HttpCore/Twig/Debug.twig') }}
-	</body>
-</html>
+		{{ include('@Berlioz-HttpCore/Twig/Debug.twig') }}</body>
+</html></body></html>

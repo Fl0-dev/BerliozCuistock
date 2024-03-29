@@ -8,6 +8,27 @@
             ]
         },
         {
+            "path": "/login",
+            "context": [
+                "App\\Controller\\UserController",
+                "loginView"
+            ]
+        },
+        {
+            "path": "/logout",
+            "context": [
+                "App\\Controller\\UserController",
+                "logout"
+            ]
+        },
+        {
+            "path": "/signIn",
+            "context": [
+                "App\\Controller\\UserController",
+                "signIn"
+            ]
+        },
+        {
             "path": "/create",
             "context": [
                 "App\\Controller\\UserController",

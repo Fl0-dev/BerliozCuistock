@@ -31,7 +31,7 @@ class Validation
             $errors['email'] = 'Email is not valid';
         } elseif (strlen($data['email']) > 255) {
             $errors['email'] = 'Email must be less than 255 characters.';
-        } elseif (User::findByEmail($data['email'])) {
+        } elseif (User::isExistByEmail($data['email'])) {
             $errors['email'] = 'Email already exists';
         }
 

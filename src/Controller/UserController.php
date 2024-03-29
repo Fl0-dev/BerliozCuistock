@@ -6,6 +6,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Service\Utils;
 use App\Service\Validation;
 use Berlioz\Core\Exception\BerliozException;
 use Berlioz\Http\Core\Attribute as Berlioz;
@@ -26,7 +27,10 @@ class UserController extends AbstractController
     #[Berlioz\Route('/register', name: 'user')]
     public function registerView(): ResponseInterface
     {
-        return $this->response($this->render('user.html.twig'));
+        $isUser = Utils::userInSession();
+        return $this->response($this->render('user.html.twig', [
+            'isUser' => $isUser,
+        ]));
     }
 
     /**
@@ -39,6 +43,7 @@ class UserController extends AbstractController
     #[Berlioz\Route('/create', name: 'create', method: ['POST'])]
     public function create(Request $request): ResponseInterface
     {
+        $isUser = Utils::userInSession();
         $data = $request->getParsedBody();
         if ($data && is_array($data)) {
             $errors = Validation::validate($data);
@@ -47,6 +52,7 @@ class UserController extends AbstractController
                 return $this->response($this->render('user.html.twig', [
                     'errors' => $errors,
                     'data' => $data,
+                    'isUser' => $isUser,
                 ]));
             }
 
@@ -65,6 +71,67 @@ class UserController extends AbstractController
         return $this->response($this->render('user.html.twig', [
             'data' => $data,
             'success' => 'User created successfully.',
+        ]));
+    }
+
+    /**
+     * login route.
+     *
+     * @return ResponseInterface
+     * @throws BerliozException
+     * @throws Error
+     */
+    #[Berlioz\Route('/login', name: 'login')]
+    public function loginView(): ResponseInterface
+    {
+        $isUser = Utils::userInSession();
+        return $this->response($this->render('login.html.twig', [
+            'isUser' => $isUser,
+        ]));
+    }
+
+    /**
+     * login route.
+     *
+     * @return ResponseInterface
+     * @throws BerliozException
+     * @throws Error
+     */
+    #[Berlioz\Route('/signIn', name: 'signIn', method: ['POST'])]
+    public function signIn(Request $request): ResponseInterface
+    {
+        $isUser = Utils::userInSession();
+        $data = $request->getParsedBody();
+        if ($data && is_array($data)) {
+            $user = User::findByEmail($data['email']);
+            if ($user && password_verify($data['password'], $user['password'])) {
+                session_start();
+                unset($user['password']);
+                $_SESSION['user'] = $user;
+                return $this->redirect('/');
+            }
+        }
+        return $this->response($this->render('login.html.twig', [
+            'errors' => 'Invalid email or password.',
+            'isUser' => $isUser,
+        ]));
+    }
+
+    /**
+     * logout route.
+     *
+     * @return ResponseInterface
+     * @throws BerliozException
+     * @throws Error
+     */
+    #[Berlioz\Route('/logout', name: 'logout')]
+    public function logout(): ResponseInterface
+    {
+        session_start();
+        unset($_SESSION['user']);
+        return $this->response($this->render('login.html.twig', [
+            'success' => 'Logout successfully.',
+            'isUser' => false,
         ]));
     }
 }

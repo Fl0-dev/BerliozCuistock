@@ -119,12 +119,19 @@ class User extends Entity
         $this->updated_at = $updated_at;
     }
 
-    public static function findByEmail(string $email): bool
+    public static function isExistByEmail(string $email): bool
     {
         $user = User::query()
             ->where('email', '=', $email)
             ->fetchOne();
 
         return $user !== null;
+    }
+
+    public static function findByEmail(string $email): ?array
+    {
+        return User::query()
+            ->where('email', '=', $email)
+            ->fetchOne();
     }
 }
